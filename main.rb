@@ -15,7 +15,9 @@ class ParkingSpace
     @lotnum = lotnum
   end
 end
+
 ##methods pertaining to our actions such as parking and leaving the parking slot. 
+
 def park(car)
   if parkingAvailable
     self.car = car
@@ -40,16 +42,42 @@ end
 
 
 
+#Parking attendant interface
+def parkingUI()
+  puts "Parking Allocation Solution"
+  puts "Enter number of the activity you want to do"
+  puts "1 - Park Car"
+  puts "2 - Car exits"
+  puts "3 - Find cars with specific color"
+  puts "4 - Find cars with specifc plate number"
+  selectedOption = gets.chomp()
+  selectedOption = selectedOption.to_i
 
-#Attendant gets information without slot assignement yet
+  if selectedOption == 1
+    puts "Input vehicle plate number"
+    plate1 = gets.chomp()
+    puts "Input vehicle color"
+    color1 = gets.chomp()
+    car1 = Car.new(plate1, color1)
+    puts car1.platenum
+  elsif selectedOption == 2
+    puts "car exits"
+  elsif selectedOption == 3
+    puts "color query"
+  elsif selectedOption == 4
+    puts "plate number query"
+  else
+    puts "invalid input"
+   parkingUI
+  end
+end
 
-puts "Input vehicle plate number"
-plate1 = gets.chomp()
-puts "Input vehicle color"
-color1 = gets.chomp()
+#Main method code
+parkingUI
 
-car1 = Car.new(plate1, color1)
-puts car1.platenum
 
-#Attempt to create parking slots by initializing an array
+
+
+
+
 
