@@ -40,10 +40,19 @@ def carInSlot
   !car.nil
 end
 
-
+## testing of creating arrays
+## creating parking lots depending on user input
+def parkingSlotCreation
+  puts "How may parking spaces are available today?"
+  numberOfParkingSlots = gets.chomp()
+  numberOfParkingSlots = numberOfParkingSlots.to_i
+  parkingSlot = Array.new(numberOfParkingSlots)
+  puts "#{parkingSlot}"
+end
 
 #Parking attendant interface
 def parkingUI()
+
   puts "Parking Allocation Solution"
   puts "Enter number of the activity you want to do"
   puts "1 - Park Car"
@@ -73,8 +82,14 @@ def parkingUI()
 end
 
 #Main method code
+parkingSlotCreation
 parkingUI
 
+#test area
+#slot = gets.chomp()
+#slot = slot.to_i
+#prking = Array.new (slot)
+#puts "#{prking}"
 
 
 
