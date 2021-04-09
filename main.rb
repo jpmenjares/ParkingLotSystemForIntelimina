@@ -82,8 +82,8 @@ def parkingUI()
 end
 
 #Main method code
-parkingSlotCreation
-parkingUI
+#parkingSlotCreation
+#parkingUI
 
 #test area
 #slot = gets.chomp()
@@ -93,6 +93,16 @@ parkingUI
 
 
 
+a = Array.new
+puts "Input vehicle plate number"
+plate1 = gets.chomp()
+puts "Input vehicle color"
+color1 = gets.chomp()
+car1 = Car.new(plate1, color1)
+a << car1
+a << "second item"
+puts "#{a}"
+puts a[0]
 
 
 
