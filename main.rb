@@ -40,6 +40,8 @@ def carInSlot
   !car.nil
 end
 
+
+
 ## testing of creating arrays
 ## creating parking lots depending on user input
 def parkingSlotCreation
@@ -50,9 +52,14 @@ def parkingSlotCreation
   puts "#{parkingSlot}"
 end
 
+
 #Parking attendant interface
 def parkingUI()
-
+  puts "How may parking spaces are available today?"
+  numberOfParkingSlots = gets.chomp()
+  numberOfParkingSlots = numberOfParkingSlots.to_i
+  parkingSlot = Array.new(numberOfParkingSlots)
+  puts "#{parkingSlot}"
   puts "Parking Allocation Solution"
   puts "Enter number of the activity you want to do"
   puts "1 - Park Car"
@@ -68,7 +75,8 @@ def parkingUI()
     puts "Input vehicle color"
     color1 = gets.chomp()
     car1 = Car.new(plate1, color1)
-    puts car1.platenum
+    parkingSlot[0] = car1
+    puts "#{parkingSlot}"
   elsif selectedOption == 2
     puts "car exits"
   elsif selectedOption == 3
@@ -81,28 +89,27 @@ def parkingUI()
   end
 end
 
-#Main method code
-#parkingSlotCreation
-#parkingUI
+###Main method code###
+#parkingSlotCreation - question i was supposed to call this method within ParkingUI or call it separately but when i do it that why, parkingUI doesnt recognize the parkingSlot array
+parkingUI
 
-#test area
-#slot = gets.chomp()
-#slot = slot.to_i
-#prking = Array.new (slot)
-#puts "#{prking}"
+###test area###
+#a = Array.new(6)
+#puts "#{a}"
+#puts "Input vehicle plate number"
+#plate1 = gets.chomp()
+#puts "Input vehicle color"
+#color1 = gets.chomp()
+#car1 = Car.new(plate1, color1)
+#a[0] = car1
+#puts a[0]
+#puts "#{a}"
 
 
-
-a = Array.new
-puts "Input vehicle plate number"
-plate1 = gets.chomp()
-puts "Input vehicle color"
-color1 = gets.chomp()
-car1 = Car.new(plate1, color1)
-a << car1
-a << "second item"
-puts "#{a}"
-puts a[0]
+#a = Array.new(6)
+#puts "#{a}"
+#a[1] = "michelle"
+#puts "#{a}"
 
 
 
