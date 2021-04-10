@@ -20,23 +20,7 @@ class ParkingSpace
   end
 end
 
-##methods pertaining to our actions such as parking and leaving the parking slot. 
 
-def leaveSlot
-  car = nil
-end
-
-#Check if parking slot is vacant
-def parkingAvailable(car)
-  !carInSlot
-end
-
-def carInSlot
-  !car.nil
-end
-
-
-## testing of creating arrays
 ## creating parking lots depending on user input
 def parkingSlotCreation(p)
   puts "How may parking spaces are available today?"
@@ -64,10 +48,7 @@ def parkingUI(pspace)
     puts "Input vehicle color"
     color1 = gets.chomp()
     car1 = Car.new(plate1, color1)
-    freeSlotNo = pspace.parkingSlot.index(nil)# number or nil
-    # Array.index(<searchvar>) - nil
-    # nil
-    # [a,b,c,d]
+    freeSlotNo = pspace.parkingSlot.index(nil)
     puts "#{freeSlotNo}"
     if freeSlotNo != nil
       pspace.parkingSlot[freeSlotNo] = car1
@@ -79,18 +60,14 @@ def parkingUI(pspace)
     puts "Car exits"
     puts "Enter the plate number of the car thats leaving:"
     carExit = gets.chomp()
-    slotArray = pspace.parkingSlot.each_index.select { |idx| pspace.parkingSlot[idx] != nil and pspace.parkingSlot[idx].platenum == carExit
-    } # Returns index on array
+    slotArray = pspace.parkingSlot.each_index.select { |idx| pspace.parkingSlot[idx] != nil and pspace.parkingSlot[idx].platenum == carExit} 
     if slotArray.length() > 0
+      #iterate array to be able to input the nil value to the array
      slotArray.each_with_index {|val, index| pspace.parkingSlot[index] = nil  }
-     puts slotArray
-     #puts "#{val} => #{index}"
+     puts slotArray 
     else
       puts "Car not found"
     end
-    # find_index { |c| c != nil and c.plateNum == plateNumvariable }
-    # returns number
-    #pspace.parkingSlot[returnvalue] = nil
   elsif selectedOption == 3
     puts "Color query"
      puts "What's color of the car are you looking for"
@@ -133,24 +110,7 @@ parkingUI(pspace)
 
 
 
-###test area###
-#a = Array.new(6)
-#puts "#{a}"
-#puts "Input vehicle plate number"
-#plate1 = gets.chomp()
-#puts "Input vehicle color"
-#color1 = gets.chomp()
-#car1 = Car.new(plate1, color1)
-#a[0] = car1
-#puts a[0]
-#puts "#{a}"
 
-
-#numbers = [3, 7, 12, 2, 49, 12]
-#puts numbers.each_index.select{|index| numbers[index]==12}
-
-#a= ["whitered", "bluewhite"]
-#puts a.each_index.select{|index| a[index]=~ /white/}
   
 
 
