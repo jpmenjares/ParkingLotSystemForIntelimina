@@ -10,9 +10,14 @@ end
 
 ##Creating a ParkingSpace
 class ParkingSpace
-  def initialize(parkinglot, lotnum)
-    @parkinglot = parkinglot
-    @lotnum = lotnum
+  attr_accessor :parkingSlot
+  def initialize()
+  end
+  def SetParkingSlot(num)
+    @parkingSlot = Array.new(num)
+  end 
+  def GetParkingSlot()
+    return @parkingSlot
   end
 end
 
@@ -41,25 +46,20 @@ def carInSlot
 end
 
 
-
 ## testing of creating arrays
 ## creating parking lots depending on user input
-def parkingSlotCreation
+def parkingSlotCreation(p)
   puts "How may parking spaces are available today?"
   numberOfParkingSlots = gets.chomp()
   numberOfParkingSlots = numberOfParkingSlots.to_i
-  parkingSlot = Array.new(numberOfParkingSlots)
+  # parkingSlot = Array.new(numberOfParkingSlots)
+  parkingSlot = p.SetParkingSlot(numberOfParkingSlots)
   puts "#{parkingSlot}"
 end
 
 
 #Parking attendant interface
-def parkingUI()
-  puts "How may parking spaces are available today?"
-  numberOfParkingSlots = gets.chomp()
-  numberOfParkingSlots = numberOfParkingSlots.to_i
-  parkingSlot = Array.new(numberOfParkingSlots)
-  puts "#{parkingSlot}"
+def parkingUI(pspace)
   puts "Parking Allocation Solution"
   puts "Enter number of the activity you want to do"
   puts "1 - Park Car"
@@ -75,8 +75,15 @@ def parkingUI()
     puts "Input vehicle color"
     color1 = gets.chomp()
     car1 = Car.new(plate1, color1)
-    parkingSlot[0] = car1
-    puts "#{parkingSlot}"
+    # parkCar(pspace, car1)
+    index = pspace.parkingSlot.index(nil)
+    puts "#{index}"
+    if index != nil
+      pspace.parkingSlot[index] = car1
+    else
+      puts "PARKING SLOT IS FULL!!!"
+    end
+    puts "#{pspace.parkingSlot}"
   elsif selectedOption == 2
     puts "car exits"
   elsif selectedOption == 3
@@ -85,13 +92,14 @@ def parkingUI()
     puts "plate number query"
   else
     puts "invalid input"
-   parkingUI
   end
+  parkingUI(pspace)
 end
 
-###Main method code###
-#parkingSlotCreation - question i was supposed to call this method within ParkingUI or call it separately but when i do it that why, parkingUI doesnt recognize the parkingSlot array
-parkingUI
+####Main method code####
+pspace = ParkingSpace.new() # singleton
+parkingSlotCreation(pspace) #- question i was supposed to call this method within ParkingUI or call it separately but when i do it that why, parkingUI doesnt recognize the parkingSlot array#
+parkingUI(pspace)
 
 ###test area###
 #a = Array.new(6)
