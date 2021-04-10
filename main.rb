@@ -4,7 +4,6 @@ class Car
   def initialize(platenum, color)
     @platenum = platenum
     @color = color
-    puts "Code is working"
   end
 end
 
@@ -22,15 +21,6 @@ class ParkingSpace
 end
 
 ##methods pertaining to our actions such as parking and leaving the parking slot. 
-
-def park(car)
-  if parkingAvailable
-    self.car = car
-  else
-    puts "There are no more slots left"
-  end
-
-end
 
 def leaveSlot
   car = nil
@@ -52,7 +42,6 @@ def parkingSlotCreation(p)
   puts "How may parking spaces are available today?"
   numberOfParkingSlots = gets.chomp()
   numberOfParkingSlots = numberOfParkingSlots.to_i
-  # parkingSlot = Array.new(numberOfParkingSlots)
   parkingSlot = p.SetParkingSlot(numberOfParkingSlots)
   puts "#{parkingSlot}"
 end
@@ -75,31 +64,74 @@ def parkingUI(pspace)
     puts "Input vehicle color"
     color1 = gets.chomp()
     car1 = Car.new(plate1, color1)
-    # parkCar(pspace, car1)
-    index = pspace.parkingSlot.index(nil)
-    puts "#{index}"
-    if index != nil
-      pspace.parkingSlot[index] = car1
+    freeSlotNo = pspace.parkingSlot.index(nil)# number or nil
+    # Array.index(<searchvar>) - nil
+    # nil
+    # [a,b,c,d]
+    puts "#{freeSlotNo}"
+    if freeSlotNo != nil
+      pspace.parkingSlot[freeSlotNo] = car1
     else
       puts "PARKING SLOT IS FULL!!!"
     end
     puts "#{pspace.parkingSlot}"
   elsif selectedOption == 2
-    puts "car exits"
+    puts "Car exits"
+    puts "Enter the plate number of the car thats leaving:"
+    carExit = gets.chomp()
+    slotArray = pspace.parkingSlot.each_index.select { |idx| pspace.parkingSlot[idx] != nil and pspace.parkingSlot[idx].platenum == carExit
+    } # Returns index on array
+    if slotArray.length() > 0
+     slotArray.each_with_index {|val, index| pspace.parkingSlot[index] = nil  }
+     puts slotArray
+     #puts "#{val} => #{index}"
+    else
+      puts "Car not found"
+    end
+    # find_index { |c| c != nil and c.plateNum == plateNumvariable }
+    # returns number
+    #pspace.parkingSlot[returnvalue] = nil
   elsif selectedOption == 3
-    puts "color query"
+    puts "Color query"
+     puts "What's color of the car are you looking for"
+    searchColor = gets.chomp()
+    searchColor = searchColor.to_s
+    slotArray = pspace.parkingSlot.each_index.select { |idx| pspace.parkingSlot[idx] != nil and pspace.parkingSlot[idx].color == searchColor
+    } # Returns index on array
+    if slotArray.length() > 0
+      puts "Cars can be found in the following slots:" + slotArray.to_s
+    else
+      puts "Car not found"
+    end
   elsif selectedOption == 4
     puts "plate number query"
+    puts "What's the plate number of the car you are looking for?"
+    searchPlateNum = gets.chomp()
+    searchPlateNum = searchPlateNum.to_s
+    slotArray = pspace.parkingSlot.each_index.select { |idx| pspace.parkingSlot[idx] != nil and pspace.parkingSlot[idx].platenum == searchPlateNum
+    } # Returns index on array
+    if slotArray.length() > 0
+      puts "Cars can be found in the following slots:" + slotArray.to_s
+    else
+      puts "Car not found"
+    end
   else
     puts "invalid input"
   end
   parkingUI(pspace)
 end
 
-####Main method code####
-pspace = ParkingSpace.new() # singleton
-parkingSlotCreation(pspace) #- question i was supposed to call this method within ParkingUI or call it separately but when i do it that why, parkingUI doesnt recognize the parkingSlot array#
+###### MAIN METHOD #####
+pspace = ParkingSpace.new()
+parkingSlotCreation(pspace)
+###activate Test case for debugging
+#pspace.parkingSlot[0] = Car.new('abc123', 'red')
+#pspace.parkingSlot[1] = Car.new('def456', 'white')
+#pspace.parkingSlot[2] = Car.new('qwe783', 'red')
 parkingUI(pspace)
+
+
+
 
 ###test area###
 #a = Array.new(6)
@@ -114,10 +146,12 @@ parkingUI(pspace)
 #puts "#{a}"
 
 
-#a = Array.new(6)
-#puts "#{a}"
-#a[1] = "michelle"
-#puts "#{a}"
+#numbers = [3, 7, 12, 2, 49, 12]
+#puts numbers.each_index.select{|index| numbers[index]==12}
+
+#a= ["whitered", "bluewhite"]
+#puts a.each_index.select{|index| a[index]=~ /white/}
+  
 
 
 
